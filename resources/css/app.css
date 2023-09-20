@@ -8,3 +8,6 @@ body {
 h1 {
   font-size: 1.6rem;
 }
+a {
+  @apply text-blue-600;
+}

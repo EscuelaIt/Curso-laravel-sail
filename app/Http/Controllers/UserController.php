@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Notifications\HelloNotification;
 
 class UserController extends Controller
 {
@@ -20,6 +21,21 @@ class UserController extends Controller
         return view('users.list')->with([
             'users' => $users,
         ]);
+    }
+
+    public function notify(Request $request, $id) {
+        $user = User::find($id);
+
+        if(! $user) {
+            abort(404);
+        }
+
+        $user->notify(new HelloNotification("Esto es un mensaje arbitrario"));
+
+        $request->session()->flash('feedback', 'Se ha enviado la notificacion');
+
+        return redirect('/usuarios');
+
     }
 
 }
