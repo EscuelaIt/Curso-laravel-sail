@@ -23,7 +23,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function notify(Request $request, $id) {
+    public function notify($id) {
         $user = User::find($id);
 
         if(! $user) {
@@ -32,9 +32,9 @@ class UserController extends Controller
 
         $user->notify(new HelloNotification("Esto es un mensaje arbitrario"));
 
-        $request->session()->flash('feedback', 'Se ha enviado la notificacion');
+        // $request->session()->flash('feedback', 'Se ha enviado la notificacion');
 
-        return redirect('/usuarios');
+        return redirect('/usuarios')->with('feedback', 'Se ha enviado la notificacion');
 
     }
 

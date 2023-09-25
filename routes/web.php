@@ -35,5 +35,5 @@ Route::middleware(['auth'])->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/usuarios', [UserController::class, 'index'])->middleware(['auth']);
+Route::get('/usuarios', [UserController::class, 'index'])->middleware(['auth', 'verified']);
 Route::get('/usuarios/notificar/{id}', [UserController::class, 'notify'])->middleware(['auth']);
